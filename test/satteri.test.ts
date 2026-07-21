@@ -19,4 +19,15 @@ describe("downgradeHeading", () => {
 
 		expect(result.html).toBe("<h6>Five</h6>\n<h6>Six</h6>\n");
 	});
+
+	it("preserves headings when disabled in Astro frontmatter", () => {
+		const result = markdownToHtml("# One\n\n## Two", {
+			mdastPlugins: [downgradeHeading()],
+			data: {
+				astro: { frontmatter: { downgradeHeading: { enabled: false } } },
+			},
+		});
+
+		expect(result.html).toBe("<h1>One</h1>\n<h2>Two</h2>\n");
+	});
 });

@@ -46,6 +46,16 @@ export default defineConfig({
 The integration detects Astro's configured Markdown processor and registers the
 Satteri or remark plugin without replacing existing processor options.
 
+To preserve the original heading levels for an individual Markdown file, set
+`downgradeHeading.enabled` to `false` in its frontmatter:
+
+```md
+---
+downgradeHeading:
+  enabled: false
+---
+```
+
 ## Direct usage
 
 Use the processor-specific plugins directly outside Astro or when configuring

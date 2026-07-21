@@ -11,4 +11,17 @@ describe("remarkDowngradeHeading", () => {
 
 		expect(String(result)).toBe("## One\n\n> ###### Five\n");
 	});
+
+	it("preserves headings when disabled in Astro frontmatter", () => {
+		const result = remark()
+			.use(remarkDowngradeHeading)
+			.processSync({
+				value: "# One\n\n## Two",
+				data: {
+					astro: { frontmatter: { downgradeHeading: { enabled: false } } },
+				},
+			});
+
+		expect(String(result)).toBe("# One\n\n## Two\n");
+	});
 });

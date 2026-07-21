@@ -11,6 +11,14 @@ export function downgradeHeading(): DowngradeHeadingPlugin {
 	return {
 		name: "astro-downgrade-heading",
 		heading(node, ctx) {
+			const astro = ctx.data.astro as
+				| { frontmatter?: { downgradeHeading?: { enabled?: unknown } } }
+				| undefined;
+
+			if (astro?.frontmatter?.downgradeHeading?.enabled === false) {
+				return;
+			}
+
 			const depth = Math.min(node.depth + 1, 6) as typeof node.depth;
 
 			if (depth !== node.depth) {
