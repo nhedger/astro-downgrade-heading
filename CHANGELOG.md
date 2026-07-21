@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v0.2.0 - 2026-07-21
+
+
+### ✨ Features
+
+* add per-file opt-out option by [@nhedger](https://github.com/nhedger) ([554a07a](https://github.com/nhedger/astro-downgrade-heading/commit/554a07aebaeefd7439926681cf33c2ec7cce42fc))
+
+
+
+### 🤝 Contributors
+* @nhedger
+
+**Comparison**: https://github.com/nhedger/astro-downgrade-heading/compare/v0.1.0...v0.2.0
+
 ## v0.1.0 - 2026-07-21
 
 
