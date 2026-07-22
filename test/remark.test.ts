@@ -12,6 +12,14 @@ describe("remarkDowngradeHeading", () => {
 		expect(String(result)).toBe("## One\n\n> ###### Five\n");
 	});
 
+	it("downgrades headings by the configured number of levels", () => {
+		const result = remark()
+			.use(remarkDowngradeHeading, { by: 2 })
+			.processSync("# One\n\n##### Five");
+
+		expect(String(result)).toBe("### One\n\n###### Five\n");
+	});
+
 	it("preserves headings when disabled in Astro frontmatter", () => {
 		const result = remark()
 			.use(remarkDowngradeHeading)

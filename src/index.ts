@@ -1,23 +1,28 @@
 import type { AstroIntegration } from "astro";
 
+import type { DowngradeHeadingOptions } from "./options";
 import remarkDowngradeHeading from "./plugins/remark";
 import { downgradeHeading } from "./plugins/satteri";
 
+export type { DowngradeHeadingOptions } from "./options";
+
 const integrationName = "astro-downgrade-heading";
 
-export function astroDowngradeHeading(): AstroIntegration {
+export function astroDowngradeHeading(
+	integrationOptions: DowngradeHeadingOptions = {},
+): AstroIntegration {
 	return {
 		name: integrationName,
 		hooks: {
 			"astro:config:setup": ({ config, logger }) => {
 				const { processor } = config.markdown;
-				const options = processor.options as Record<string, unknown>;
+				const processorOptions = processor.options as Record<string, unknown>;
 
 				if (
 					processor.name === "satteri" &&
-					Array.isArray(options.mdastPlugins)
+					Array.isArray(processorOptions.mdastPlugins)
 				) {
-					const alreadyRegistered = options.mdastPlugins.some(
+					const alreadyRegistered = processorOptions.mdastPlugins.some(
 						(plugin) =>
 							typeof plugin === "object" &&
 							plugin !== null &&
@@ -26,7 +31,9 @@ export function astroDowngradeHeading(): AstroIntegration {
 					);
 
 					if (!alreadyRegistered) {
-						options.mdastPlugins.push(downgradeHeading());
+						processorOptions.mdastPlugins.push(
+							downgradeHeading(integrationOptions),
+						);
 					}
 
 					return;
@@ -34,16 +41,19 @@ export function astroDowngradeHeading(): AstroIntegration {
 
 				if (
 					processor.name === "unified" &&
-					Array.isArray(options.remarkPlugins)
+					Array.isArray(processorOptions.remarkPlugins)
 				) {
-					const alreadyRegistered = options.remarkPlugins.some(
+					const alreadyRegistered = processorOptions.remarkPlugins.some(
 						(plugin) =>
 							plugin === remarkDowngradeHeading ||
 							(Array.isArray(plugin) && plugin[0] === remarkDowngradeHeading),
 					);
 
 					if (!alreadyRegistered) {
-						options.remarkPlugins.push(remarkDowngradeHeading);
+						processorOptions.remarkPlugins.push([
+							remarkDowngradeHeading,
+							integrationOptions,
+						]);
 					}
 
 					return;

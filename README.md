@@ -46,10 +46,19 @@ export default defineConfig({
 The integration detects Astro's configured Markdown processor and registers the
 Satteri or remark plugin without replacing existing processor options.
 
+Headings are downgraded by one level by default. Set `by` to downgrade them by a
+different number of levels; resulting headings are always capped at `h6`:
+
+```js
+export default defineConfig({
+	integrations: [downgradeHeading({ by: 2 })],
+});
+```
+
 To preserve the original heading levels for an individual Markdown file, set
 `downgradeHeading.enabled` to `false` in its frontmatter:
 
-```md
+```yaml
 ---
 downgradeHeading:
   enabled: false
@@ -68,7 +77,7 @@ import { markdownToHtml } from "satteri";
 import downgradeHeading from "astro-downgrade-heading/satteri";
 
 const { html } = markdownToHtml("# Page heading", {
-  mdastPlugins: [downgradeHeading()],
+  mdastPlugins: [downgradeHeading({ by: 2 })],
 });
 ```
 
@@ -79,7 +88,7 @@ import { remark } from "remark";
 import remarkDowngradeHeading from "astro-downgrade-heading/remark";
 
 const markdown = await remark()
-  .use(remarkDowngradeHeading)
+  .use(remarkDowngradeHeading, { by: 2 })
   .process("# Page heading");
 ```
 
