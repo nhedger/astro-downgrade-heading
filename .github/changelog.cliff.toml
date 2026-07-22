@@ -48,7 +48,7 @@ body = """
   ### 🤝 Contributors
 {%- endif %}\
 {% for contributor in github.contributors %}
-  * @{{ contributor.username }}
+  * [@{{ contributor.username }}]({{ self::github_user_url(username=contributor.username) }})
 {%- endfor -%}
 {%- endif -%}
 
