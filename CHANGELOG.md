@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v0.3.0 - 2026-07-22
+
+
+### ✨ Features
+
+* feat: add configurable heading downgrade amount by [@nhedger](https://github.com/nhedger) in [#1](https://github.com/nhedger/astro-downgrade-heading/pull/1) ([a4b2e42](https://github.com/nhedger/astro-downgrade-heading/commit/a4b2e42967e58b30c53ab566686046c2d44208d1))
+
+
+
+### 🤝 Contributors
+* @nhedger
+
+**Comparison**: https://github.com/nhedger/astro-downgrade-heading/compare/v0.2.0...v0.3.0
+
 ## v0.2.0 - 2026-07-21
 
 

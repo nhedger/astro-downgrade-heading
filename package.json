@@ -1,6 +1,6 @@
 {
 	"name": "astro-downgrade-heading",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"description": "Astro integration and plugins for downgrading Markdown heading levels",
 	"author": "Nicolas Hedger <nicolas@hedger.ch>",
 	"repository": {
