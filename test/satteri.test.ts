@@ -20,6 +20,14 @@ describe("downgradeHeading", () => {
 		expect(result.html).toBe("<h6>Five</h6>\n<h6>Six</h6>\n");
 	});
 
+	it("downgrades headings by the configured number of levels", () => {
+		const result = markdownToHtml("# One\n\n##### Five", {
+			mdastPlugins: [downgradeHeading({ by: 2 })],
+		});
+
+		expect(result.html).toBe("<h3>One</h3>\n<h6>Five</h6>\n");
+	});
+
 	it("preserves headings when disabled in Astro frontmatter", () => {
 		const result = markdownToHtml("# One\n\n## Two", {
 			mdastPlugins: [downgradeHeading()],

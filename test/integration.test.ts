@@ -1,14 +1,21 @@
+import { type MdastPluginInput, markdownToHtml } from "satteri";
 import { describe, expect, it, vi } from "vitest";
 
-import astroDowngradeHeading from "../src/index";
+import astroDowngradeHeading, {
+	type DowngradeHeadingOptions,
+} from "../src/index";
 
 interface TestProcessor {
 	name: string;
 	options: Record<string, unknown>;
 }
 
-function runSetup(processor: TestProcessor, warn = vi.fn()) {
-	const hook = astroDowngradeHeading().hooks["astro:config:setup"];
+function runSetup(
+	processor: TestProcessor,
+	options?: DowngradeHeadingOptions,
+	warn = vi.fn(),
+) {
+	const hook = astroDowngradeHeading(options).hooks["astro:config:setup"];
 
 	if (!hook) {
 		throw new Error("Missing astro:config:setup hook");
@@ -42,7 +49,22 @@ describe("astroDowngradeHeading", () => {
 
 		expect(remarkPlugins).toHaveLength(2);
 		expect(remarkPlugins[0]).toBe(existingPlugin);
-		expect(remarkPlugins[1]).toBeTypeOf("function");
+		expect(remarkPlugins[1]).toEqual([expect.any(Function), {}]);
+	});
+
+	it("forwards options to both processor plugins", async () => {
+		const options = { by: 2 };
+		const mdastPlugins: unknown[] = [];
+		const remarkPlugins: unknown[] = [];
+
+		runSetup({ name: "satteri", options: { mdastPlugins } }, options);
+		runSetup({ name: "unified", options: { remarkPlugins } }, options);
+
+		const result = await markdownToHtml("# One", {
+			mdastPlugins: mdastPlugins as MdastPluginInput[],
+		});
+		expect(result.html).toBe("<h3>One</h3>\n");
+		expect(remarkPlugins[0]).toEqual([expect.any(Function), options]);
 	});
 
 	it("warns when the Markdown processor is unsupported", () => {

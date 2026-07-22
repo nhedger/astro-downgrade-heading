@@ -1,7 +1,13 @@
 import type { Root } from "mdast";
 import { visit } from "unist-util-visit";
 
-export function remarkDowngradeHeading() {
+import type { DowngradeHeadingOptions } from "../options";
+
+export type { DowngradeHeadingOptions } from "../options";
+
+export function remarkDowngradeHeading({
+	by = 1,
+}: DowngradeHeadingOptions = {}) {
 	return (tree: Root, file: { data: Record<string, unknown> }) => {
 		const astro = file.data.astro as
 			| { frontmatter?: { downgradeHeading?: { enabled?: unknown } } }
@@ -12,7 +18,7 @@ export function remarkDowngradeHeading() {
 		}
 
 		visit(tree, "heading", (node) => {
-			node.depth = Math.min(node.depth + 1, 6) as typeof node.depth;
+			node.depth = Math.min(node.depth + by, 6) as typeof node.depth;
 		});
 	};
 }
