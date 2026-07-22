@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v0.4.0 - 2026-07-22
+
+
+### ✨ Features
+
+* feat: add frontmatter shorthand for disabling heading downgrade by [@nhedger](https://github.com/nhedger) in [#2](https://github.com/nhedger/astro-downgrade-heading/pull/2) ([05f6a46](https://github.com/nhedger/astro-downgrade-heading/commit/05f6a469885ba095ef94c13b3ee6d868c1fa655c))
+
+
+
+### 🤝 Contributors
+* [@nhedger](https://github.com/nhedger)
+
+**Comparison**: https://github.com/nhedger/astro-downgrade-heading/compare/v0.3.0...v0.4.0
+
 ## v0.3.0 - 2026-07-22
 
 
