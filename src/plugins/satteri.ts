@@ -18,10 +18,18 @@ export function downgradeHeading({
 		name: "astro-downgrade-heading",
 		heading(node, ctx) {
 			const astro = ctx.data.astro as
-				| { frontmatter?: { downgradeHeading?: { enabled?: unknown } } }
+				| {
+						frontmatter?: {
+							downgradeHeading?: false | { enabled?: unknown };
+						};
+				  }
 				| undefined;
+			const frontmatterOptions = astro?.frontmatter?.downgradeHeading;
 
-			if (astro?.frontmatter?.downgradeHeading?.enabled === false) {
+			if (
+				frontmatterOptions === false ||
+				frontmatterOptions?.enabled === false
+			) {
 				return;
 			}
 
