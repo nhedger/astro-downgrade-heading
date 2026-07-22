@@ -6,7 +6,8 @@ owner = "nhedger"
 repo  = "astro-downgrade-heading"
 
 [bump]
-initial_tag = "0.1.0"
+initial_tag                = "0.1.0"
+features_always_bump_minor = false
 
 [changelog]
 
@@ -64,10 +65,10 @@ postprocessors = []
 conventional_commits = true
 filter_unconventional = true
 commit_parsers = [
-    { message = "^feat", group = "✨ Features" },
-    { message = "^fix", group = "🐛 Bug Fixes" },
-    { message = "^perf", group = "⚡ Performance Improvements" },
-    { message = "^revert", group = "⏪ Reverts" },
+  { message = "^feat", group = "✨ Features" },
+  { message = "^fix", group = "🐛 Bug Fixes" },
+  { message = "^perf", group = "⚡ Performance Improvements" },
+  { message = "^revert", group = "⏪ Reverts" },
 ]
 split_commits = false
 commit_preprocessors = [{ pattern = '\((\w+\s)?#([0-9]+)\)', replace = "" }]

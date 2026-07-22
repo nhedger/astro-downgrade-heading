@@ -6,7 +6,8 @@ owner = "nhedger"
 repo  = "astro-downgrade-heading"
 
 [bump]
-initial_tag = "0.1.0"
+initial_tag                = "0.1.0"
+features_always_bump_minor = false
 
 [changelog]
 header = """
