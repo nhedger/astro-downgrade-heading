@@ -38,4 +38,15 @@ describe("downgradeHeading", () => {
 
 		expect(result.html).toBe("<h1>One</h1>\n<h2>Two</h2>\n");
 	});
+
+	it("preserves headings when disabled with the Astro frontmatter shorthand", () => {
+		const result = markdownToHtml("# One\n\n## Two", {
+			mdastPlugins: [downgradeHeading()],
+			data: {
+				astro: { frontmatter: { downgradeHeading: false } },
+			},
+		});
+
+		expect(result.html).toBe("<h1>One</h1>\n<h2>Two</h2>\n");
+	});
 });

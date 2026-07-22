@@ -56,12 +56,11 @@ export default defineConfig({
 ```
 
 To preserve the original heading levels for an individual Markdown file, set
-`downgradeHeading.enabled` to `false` in its frontmatter:
+`downgradeHeading` to `false` in its frontmatter:
 
 ```yaml
 ---
-downgradeHeading:
-  enabled: false
+downgradeHeading: false
 ---
 ```
 
